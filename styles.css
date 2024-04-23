@@ -1,0 +1,97 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.image {
+    position: relative;
+    overflow: hidden;
+    flex: 1 1 calc(33.33% - 20px); /* 三欄式 */
+    max-width: calc(33.33% - 20px); /* 最大寬度為三欄式 */
+    border-radius: 10px;
+    width: 100%; /* 讓每張圖片的寬度相同 */
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(57, 57, 57, 0.5);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image:hover::before {
+    opacity: 1;
+}
+
+.image:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1200px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .image {
+        flex: 1 1 calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
